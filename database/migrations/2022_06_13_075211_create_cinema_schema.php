@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCinemaSchema extends Migration
 {
+
     /**
     # Create a migration that creates all tables for the following user stories
 
@@ -15,6 +16,8 @@ class CreateCinemaSchema extends Migration
     Please list the tables that you would create including keys, foreign keys and attributes that are required by the user stories.
 
     ## User Stories
+
+    
 
      **Movie exploration**
      * As a user I want to see which films can be watched and at what times
@@ -37,7 +40,25 @@ class CreateCinemaSchema extends Migration
      */
     public function up()
     {
-        throw new \Exception('implement in coding task 4, you can ignore this exception if you are just running the initial migrations.');
+        Schema::create('movies', function($table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('description');
+            $table->dateTime('release_date');
+            $table->boolean("booked?");
+            $table->timestamps();
+        });
+    
+      
+        Schema::create('reservations', function($table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('movie_id')->unsigned();
+            $table->string('seat_type');
+            $table->string('availibility');
+            $table->string('seat_position');
+            $table->timestamps();
+        });  
     }
 
     /**
