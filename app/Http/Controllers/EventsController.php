@@ -110,7 +110,8 @@ class EventsController extends BaseController
     ->get()->take(3);
     //$events = Event::with('workshop')->get();
 
-    return $events;
+    $events = json_decode($events);
+    dd($events);
     
     }
 
@@ -195,6 +196,9 @@ class EventsController extends BaseController
         ->where('workshops.start', '>' , Carbon::now())
         ->get()->take(2);
         
-        return $events;
+        $events = json_decode($events);
+        dd($events);
+
+        
     }
 }
